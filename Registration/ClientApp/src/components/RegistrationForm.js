@@ -37,7 +37,6 @@ class CustomerForm extends React.Component {
       return month + "/" + day + "/" + year;
     };
     console.log();
-    debugger;
     if (
       values.day1 === undefined &&
       values.day2 === undefined &&
