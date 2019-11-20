@@ -12,7 +12,43 @@ namespace Registration.Services
         public List<User> GetAll()
         {
             using UserContext context = new UserContext();
-
+            context.Database.EnsureCreated();
+            User bob = new User()
+            {
+                Email = "email@email.com",
+                Name = "bob",
+                Gender = "male",
+                DateRegistered = "11/02/2019",
+                Day1 = true,
+                Day2 = false,
+                Day3 = true,
+                AdditionalRequest = "Here is some additional information"
+            };
+            User stan = new User()
+            {
+                Email = "email@email.com",
+                Name = "stan",
+                Gender = "male",
+                DateRegistered = "05/25/2019",
+                Day1 = true,
+                Day2 = true,
+                Day3 = true,
+                AdditionalRequest = "Stan is gonna need a lot of information on products"
+            };
+            User lisa = new User()
+            {
+                Email = "email@email.com",
+                Name = "lisa",
+                Gender = "female",
+                DateRegistered = "09/15/2019",
+                Day1 = true,
+                Day2 = true,
+                Day3 = false,
+            };
+            context.Add(bob);
+            context.Add(stan);
+            context.Add(lisa);
+            context.SaveChanges();
             var users = context.Users;
             var allUsers = users.ToList();
                 return allUsers;
@@ -31,7 +67,7 @@ namespace Registration.Services
                 AdditionalRequest = model.AdditionalRequest
             };
             using UserContext context = new UserContext();
-
+            context.Database.EnsureCreated();
             context.Add(bob);
             context.SaveChanges();
             return bob.Id;
@@ -39,6 +75,7 @@ namespace Registration.Services
         public User GetById(int Id)
         {
             using UserContext context = new UserContext();
+     
             User user = context.Users.FirstOrDefault(u => u.Id == Id);
             return user;
         
